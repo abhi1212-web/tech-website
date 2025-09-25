@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Accessible Modal Example</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      background: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #f0f0f0;
+    }
+
+    /* ===== MODAL OVERLAY ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease;
+      z-index: 1000;
+    }
+
+    /* ===== MODAL DIALOG ===== */
+    .modal-dialog {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(16px);
+      color: #fff;
+      padding: 2rem;
+      max-width: 480px;
+      width: 90%;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      transform: translateY(-20px);
+      opacity: 0;
+      animation: slideIn 0.4s ease forwards;
+    }
+
+    .modal-dialog h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+    }
+
+    .modal-dialog p {
+      margin: 1rem 0;
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    .modal-dialog button[data-modal-close] {
+      margin-top: 1rem;
+      background: #ff4b5c;
+      color: #fff;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: background 0.3s ease;
+    }
+
+    .modal-dialog button[data-modal-close]:hover {
+      background: #e04352;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button id="openModal">✨ Open Fancy Modal</button>
+
+  <div class="modal" id="myModal" aria-hidden="true">
+    <div class="modal-dialog" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDesc" tabindex="-1">
+      <h2 id="modalTitle">🌟 Welcome</h2>
+      <p id="modalDesc">This is a stylish, accessible modal with smooth animations and modern design.</p>
+      <button data-modal-close>Close</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import AccessibleModal from "./modal.js";
+
+    const modalEl = document.getElementById("myModal");
+    const openBtn = document.getElementById("openModal");
+
+    const modal = new AccessibleModal(modalEl, {
+      onOpen: () => console.log("Modal opened"),
+      onClose: () => console.log("Modal closed"),
+    });
+
+    openBtn.addEventListener("click", () => modal.open());
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessible Vanilla JS UI Components</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/tabs.css">
+    <link rel="stylesheet" href="css/carousel.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Accessible Vanilla JS UI Components</h1>
+        
+        <!-- Modal Demo -->
+        <section class="demo-section">
+            <h2>1. Modal Dialog</h2>
+            <button class="demo-button" onclick="modal.open()">Open Modal</button>
+        </section>
+        
+        <div id="modal" class="modal-overlay" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+            <div class="modal">
+                <button class="modal-close" aria-label="Close modal">&times;</button>
+                <h3 id="modal-title">Modal Title</h3>
+                <p>This is an accessible modal dialog with focus trap, keyboard support, and proper ARIA attributes.</p>
+                <button class="demo-button" onclick="modal.close()">Close Modal</button>
+            </div>
+        </div>
+
+        <!-- Tabs Demo -->
+        <section class="demo-section">
+            <h2>2. Tabbed Content</h2>
+            <div id="tabs" class="tabs">
+                <div class="tabs-nav" role="tablist">
+                    <button class="tab-button" role="tab" aria-controls="panel-1">Tab 1</button>
+                    <button class="tab-button" role="tab" aria-controls="panel-2">Tab 2</button>
+                    <button class="tab-button" role="tab" aria-controls="panel-3">Tab 3</button>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-panel" role="tabpanel" id="panel-1">
+                        <h4>First Panel</h4>
+                        <p>This is the content of the first tab. It supports keyboard navigation with arrow keys and proper ARIA roles.</p>
+                    </div>
+                    <div class="tab-panel" role="tabpanel" id="panel-2">
+                        <h4>Second Panel</h4>
+                        <p>Content for the second tab. You can navigate between tabs using left/right arrow keys.</p>
+                    </div>
+                    <div class="tab-panel" role="tabpanel" id="panel-3">
+                        <h4>Third Panel</h4>
+                        <p>The third tab's content. All panels have proper focus management and accessibility features.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Carousel Demo -->
+        <section class="demo-section">
+            <h2>3. Carousel/Slider</h2>
+            <div id="carousel" class="carousel">
+                <div class="carousel-track">
+                    <div class="carousel-slide">
+                        <div>
+                            <h4>Slide 1</h4>
+                            <p>Beautiful gradient backgrounds with smooth animations</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div>
+                            <h4>Slide 2</h4>
+                            <p>Touch gestures and keyboard navigation supported</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div>
+                            <h4>Slide 3</h4>
+                            <p>Fully accessible with ARIA attributes</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div>
+                            <h4>Slide 4</h4>
+                            <p>Configurable options and clean API</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-nav carousel-prev" aria-label="Previous slide">‹</button>
+                <button class="carousel-nav carousel-next" aria-label="Next slide">›</button>
+                <div class="carousel-indicators"></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Load Components -->
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/components/Modal.js"></script>
+    <script src="js/components/Tabs.js"></script>
+    <script src="js/components/Carousel.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

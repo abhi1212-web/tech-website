@@ -41,4 +41,4 @@ A collection of production-ready, accessible UI components built with pure vanil
    <link rel="stylesheet" href="css/main.css">
    <link rel="stylesheet" href="css/modal.css">
    <link rel="stylesheet" href="css/tabs.css">
-   <link rel="stylesheet" href="css/carousel.css"># tech-website
+   <link rel="stylesheet" href="css/carousel.css">

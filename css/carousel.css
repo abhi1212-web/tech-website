@@ -1,0 +1,152 @@
+/* Carousel Styles */
+.carousel {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(145deg, #1a1a2e, #16213e);
+    border: 1px solid rgba(0, 245, 255, 0.2);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 0 60px rgba(0, 245, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    max-width: 650px;
+    margin: 0 auto;
+    animation: carouselFloat 6s ease-in-out infinite;
+}
+
+@keyframes carouselFloat {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-5px) scale(1.01); }
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-slide {
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: slideShimmer 3s ease-in-out infinite;
+}
+
+@keyframes slideShimmer {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+}
+
+.carousel-slide:nth-child(1) { 
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+}
+
+.carousel-slide h4 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    animation: titleBounce 2s ease-in-out infinite;
+}
+
+@keyframes titleBounce {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-3px); }
+}
+
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 245, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: #00f5ff;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+}
+
+.carousel-nav:hover {
+    background: rgba(0, 245, 255, 0.2);
+    transform: translateY(-50%) scale(1.15) rotate(5deg);
+    box-shadow: 
+        0 8px 25px rgba(0, 245, 255, 0.3),
+        0 0 30px rgba(0, 245, 255, 0.2);
+    border-color: #00f5ff;
+}
+
+.carousel-nav:focus {
+    outline: 2px solid #ff00aa;
+    outline-offset: 3px;
+}
+
+.carousel-prev { left: 1.5rem; }
+.carousel-next { right: 1.5rem; }
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.8rem;
+}
+
+.carousel-indicator {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(0, 245, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.carousel-indicator::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #00f5ff, #ff00aa);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.carousel-indicator:hover::before,
+.carousel-indicator.active::before {
+    opacity: 1;
+}
+
+.carousel-indicator.active {
+    background: #00f5ff;
+    transform: scale(1.3);
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.6);
+    border-color: #ff00aa;
+}

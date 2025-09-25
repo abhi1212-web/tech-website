@@ -1,0 +1,117 @@
+/* Tabs Styles */
+.tabs {
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(145deg, #1a1a2e, #16213e);
+    border: 1px solid rgba(0, 245, 255, 0.2);
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    animation: tabsFloat 5s ease-in-out infinite;
+}
+
+@keyframes tabsFloat {
+    0%, 100% { transform: translateY(0px) rotateY(0deg); }
+    50% { transform: translateY(-3px) rotateY(1deg); }
+}
+
+.tabs-nav {
+    display: flex;
+    background: linear-gradient(135deg, rgba(0, 245, 255, 0.05), rgba(255, 0, 170, 0.05));
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 1.2rem 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #8892b0;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.tab-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.tab-button:hover::before {
+    left: 100%;
+}
+
+.tab-button:hover {
+    color: #00f5ff;
+    transform: translateY(-2px);
+}
+
+.tab-button.active {
+    color: #00f5ff;
+    background: rgba(0, 245, 255, 0.05);
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
+}
+
+.tab-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #00f5ff, #ff00aa);
+    animation: activeTabGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes activeTabGlow {
+    from { box-shadow: 0 0 5px rgba(0, 245, 255, 0.5); }
+    to { box-shadow: 0 0 15px rgba(255, 0, 170, 0.8); }
+}
+
+.tab-button:focus {
+    outline: 2px solid #00f5ff;
+    outline-offset: -2px;
+}
+
+.tab-content {
+    padding: 2.5rem;
+    min-height: 200px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.tab-panel {
+    display: none;
+    animation: tabSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #e2e8f0;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+@keyframes tabSlideIn {
+    from { 
+        opacity: 0; 
+        transform: translateX(20px) rotateY(5deg);
+    }
+    to { 
+        opacity: 1; 
+        transform: translateX(0) rotateY(0deg);
+    }
+}
+
+.tab-panel h4 {
+    color: #00f5ff;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
